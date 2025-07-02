@@ -1,0 +1,1 @@
+it is a static file used to test the rendering feature of flask for static files
