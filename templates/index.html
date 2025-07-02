@@ -3,25 +3,29 @@
 {% block body %}
     
     <div class="container my-3">
-        <h2>Add a Todo</h2>
+        <h2>Add a Task</h2>
         <form action="/" method="POST">
             <div class="mb-3">
-            <label for="title" class="form-label">Todo Title</label>
-            <input type="rext" class="form-control" name="title" id="title" aria-describedby="emailHelp">
+            <label for="title" class="form-label" >Task Title</label>
+            <input type="text" class="form-control" name="title" id="title" aria-describedby="emailHelp" required>
             </div>
             <div class="mb-3">
-            <label for="desc" class="form-label">Todo Description</label>
-            <input type="text" class="form-control" name="desc" id="desc">
+            <label for="desc" class="form-label" >Task Description</label>
+            <input type="text" class="form-control" name="desc" id="desc" required>
             </div>
             <button type="submit" class="btn btn-dark">Submit</button>
       </form>
     </div>
     <div class="container my-3">
-        <h2>Your Todos</h2>
-        
+               <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h2 class="m-0">Your Tasks</h2>
+                  {% if request.args.get('query') %}
+                    <a href="/" class="btn btn-outline-secondary btn-sm">Clear Search</a>
+                  {% endif %}
+                </div>
                {% if allTodo|length==0 %}
                 <div class="alert alert-dark" role="alert">
-                  No Todos found. Add your first todo now!
+                  No Tasks found. Add your first task now!
                 </div>
                   {% else %} 
                   <table class="table">

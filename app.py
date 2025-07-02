@@ -24,7 +24,13 @@ def hello_world():
         todo = Todo(title=title, desc=desc)
         db.session.add(todo)
         db.session.commit()
-    allTodo = Todo.query.all()
+
+        
+    query = request.args.get('query', '').strip()
+    if query:
+        allTodo = Todo.query.filter(Todo.title.ilike(f'%{query}%')).all()
+    else:
+        allTodo = Todo.query.all()
     return render_template('index.html', allTodo = allTodo)
     
 
@@ -33,6 +39,11 @@ def products():
     allTodo = Todo.query.all()
     print(allTodo)
     return 'this is products page'
+
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
 
 @app.route('/update/<int:sno>',  methods=['GET', 'POST'])
 def update(sno):
@@ -45,6 +56,7 @@ def update(sno):
         db.session.add(todo)
         db.session.commit()
         return redirect('/')
+
     
     todo = Todo.query.filter_by(sno = sno).first()
     return render_template('update.html', todo = todo)

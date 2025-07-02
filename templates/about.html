@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %} About {% endblock title %}
+
+{% block body %}
+<div class="container my-5">
+    <div class="card shadow rounded-4">
+        <div class="card-body p-5">
+            <h1 class="card-title mb-4 text-center">About TaskOne App</h1>
+            <p class="lead">
+                <strong>MyTodo</strong> is a simple yet powerful task management application built using <strong>Flask</strong>, <strong>SQLite</strong>, and <strong>Bootstrap 5</strong>. It's designed to help users manage their daily tasks efficiently.
+            </p>
+
+            <hr class="my-4">
+
+            <h3>🔧 Key Features</h3>
+            <ul class="list-group list-group-flush mb-4">
+                <li class="list-group-item">📝 <strong>Add Todos:</strong> Easily add tasks with a title and description.</li>
+                <li class="list-group-item">📜 <strong>View Todos:</strong> All your tasks are displayed in a structured table format.</li>
+                <li class="list-group-item">🗑️ <strong>Delete Tasks:</strong> Remove any task once it is completed or no longer needed.</li>
+                <li class="list-group-item">✏️ <strong>Update Tasks:</strong> Edit an existing task’s title or description with ease.</li>
+                <li class="list-group-item">🔍 <strong>Real-Time Search:</strong> Instantly filter todos by typing in the search bar — no page reloads!</li>
+                <li class="list-group-item">🚫 <strong>Empty Entry Protection:</strong> Prevents creation of todos with empty titles or descriptions using both client-side and server-side validation.</li>
+            </ul>
+
+            <h3>🚀 How It Works</h3>
+            <ol>
+                <li>User lands on the home page and sees the todo form and list.</li>
+                <li>They can add a task by entering a title and description.</li>
+                <li>Todos are stored in a database and listed in a Bootstrap-styled table.</li>
+                <li>Tasks can be updated or deleted with one click.</li>
+                <li>The search bar allows filtering of tasks</li>
+            </ol>
+
+            <div class="mt-5 text-center">
+                <a href="/" class="btn btn-dark px-4">Go to Home</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock body %}
