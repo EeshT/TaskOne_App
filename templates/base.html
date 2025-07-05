@@ -1,38 +1,87 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>TaskOne</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
-    </head>
-    <title>
-        {% block title%}
-        
-        {% endblock title%} - MyTodo
-    </title>
-    <body>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
-            <div class="container-fluid">
-              <a class="navbar-brand" href="/">TaskOne</a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% block title %}{% endblock title %} - MyTodo</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7"
+      crossorigin="anonymous"
+    />
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+      }
+
+      .page-wrapper {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+
+      main {
+        flex: 1;
+      }
+
+      .footer {
+        font-weight: 400;
+        font-size: 13px;
+        padding: 8px 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="page-wrapper">
+      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/">TaskOne</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" href="/about">About</a>
+              </li>
+            </ul>
+            <form class="d-flex" role="search" action="/" method="GET">
+              <input
+                class="form-control me-2"
+                type="search"
+                name="query"
+                placeholder="Search by title"
+                aria-label="Search"
+              />
+              <button class="btn btn-outline-success" type="submit">
+                Search
               </button>
-              <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                  <li class="nav-item">
-                    <a class="nav-link" href="/about">About</a>
-                  </li>
-                </ul>
-                <form class="d-flex" role="search" action="/" method="GET" >
-                  <input class="form-control me-2" type="search" name="query" placeholder="Search by title" aria-label="Search">
-                  <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
-              </div>
-            </div>
-        </nav> 
-        {% block body %}
-        
-        {% endblock body %}
-    </body>
+            </form>
+          </div>
+        </div>
+      </nav>
+
+      <main class="container my-4">
+        {% block body %}{% endblock body %}
+      </main>
+
+      <footer class="bg-body-tertiary text-center text-dark border-top footer">
+        <div class="container">
+          <p class="mb-1">&copy; 2025 TaskOne. All rights reserved.</p>
+          <p class="mb-0">Made with ❤️ by Eesh Tripathi</p>
+        </div>
+      </footer>
+    </div>
+  </body>
 </html>
