@@ -25,7 +25,7 @@ def hello_world():
         db.session.add(todo)
         db.session.commit()
 
-        
+
     query = request.args.get('query', '').strip()
     if query:
         allTodo = Todo.query.filter(Todo.title.ilike(f'%{query}%')).all()
@@ -70,4 +70,4 @@ def delete(sno):
     return redirect('/')
 
 if __name__ == "__main__":
-    app.run(debug=True, port=8000) 
+    app.run(debug=True, port=3000) 
