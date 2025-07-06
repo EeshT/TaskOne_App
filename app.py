@@ -24,14 +24,9 @@ def hello_world():
         todo = Todo(title=title, desc=desc)
         db.session.add(todo)
         db.session.commit()
+        return redirect('/tasks')
 
-
-    query = request.args.get('query', '').strip()
-    if query:
-        allTodo = Todo.query.filter(Todo.title.ilike(f'%{query}%')).all()
-    else:
-        allTodo = Todo.query.all()
-    return render_template('index.html', allTodo = allTodo)
+    return render_template('index.html')
     
 
 @app.route('/show')
@@ -60,7 +55,21 @@ def update(sno):
     
     todo = Todo.query.filter_by(sno = sno).first()
     return render_template('update.html', todo = todo)
-    
+
+@app.route('/tasks')
+def all_tasks():
+    query = request.args.get('query', '').strip()
+    if query:
+        allTodo = Todo.query.filter(Todo.title.ilike(f'%{query}%')).all()
+    else:
+        allTodo = Todo.query.all()
+    return render_template('myTasks.html', allTodo=allTodo, query=query)
+
+
+@app.route('/view/<int:sno>')
+def view(sno):
+    todo = Todo.query.get_or_404(sno)
+    return render_template('view.html', todo=todo)
 
 @app.route('/delete/<int:sno>')
 def delete(sno):

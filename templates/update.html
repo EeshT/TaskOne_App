@@ -11,7 +11,7 @@
             </div>
             <div class="mb-3">
             <label for="desc" class="form-label">Task Description</label>
-            <input type="text" class="form-control" value="{{todo.desc}}" name="desc" id="desc">
+            <textarea class="form-control" name="desc" id="desc" rows="10" required>{{ todo.desc }}</textarea>
             </div>
             <button type="submit" class="btn btn-dark">Update</button>
       </form>
