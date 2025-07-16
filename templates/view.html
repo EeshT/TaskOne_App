@@ -5,7 +5,7 @@
     <h2>{{ todo.title }}</h2>
     <p><strong>Description:</strong> {{ todo.desc  | replace('\n', '<br>') | safe}}</p>
     <p><strong>Created on:</strong> {{ todo.data_created }}</p>
-    <div class="mt-4">
+    <div class="mt-4 d-flex flex-wrap gap-2">
         <a href="/update/{{todo.sno}}" class="btn btn-outline-dark mx-1">Update</a>
         <a href="/delete/{{todo.sno}}" class="btn btn-outline-success mx-1" onclick="return confirm('Are you sure you want to mark this task as done?');">Done</a>
         <a href="/tasks" class="btn btn-secondary mx-1">Back to Tasks</a>
