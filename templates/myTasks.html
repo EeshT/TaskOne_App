@@ -31,9 +31,10 @@
               <tr>
                 <th scope="row">{{loop.index}}</th>
                 <td>{{todo.title}}</td>
-                <td style="max-width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" class="d-inline-block align-middle">
+                <td class="text-truncate" style="max-width: 200px;" title="{{ todo.desc }}">
                   {{ todo.desc }}
                 </td>
+
 
                 <td>{{todo.data_created}}</td>
                 <td>

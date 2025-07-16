@@ -9,6 +9,12 @@
         <a href="/update/{{todo.sno}}" class="btn btn-outline-dark mx-1">Update</a>
         <a href="/delete/{{todo.sno}}" class="btn btn-outline-success mx-1" onclick="return confirm('Are you sure you want to mark this task as done?');">Done</a>
         <a href="/tasks" class="btn btn-secondary mx-1">Back to Tasks</a>
+        <a href="/summarise/{{todo.sno}}" class="btn btn-warning mx-1">Summarise with AI</a>
     </div>
+    {% if summary %}
+        <div class="alert alert-info mt-4">
+            <strong>AI Summary:</strong> {{ summary }}
+        </div>
+    {% endif %}
 </div>
 {% endblock body %}

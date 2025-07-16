@@ -1,6 +1,11 @@
 from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime, timezone
+from dotenv import load_dotenv
+import os
+import requests
+
+load_dotenv()
 
 
 app = Flask(__name__)
@@ -35,10 +40,6 @@ def products():
     print(allTodo)
     return 'this is products page'
 
-
-@app.route('/about')
-def about():
-    return render_template('about.html')
 
 @app.route('/update/<int:sno>',  methods=['GET', 'POST'])
 def update(sno):
@@ -76,7 +77,43 @@ def delete(sno):
     todo = Todo.query.filter_by(sno = sno).first()
     db.session.delete(todo)
     db.session.commit()
-    return redirect('/')
+    return redirect('/tasks')
+
+@app.route('/summarise/<int:sno>')
+def summarise(sno):
+    todo = Todo.query.get_or_404(sno)
+    long_desc = todo.desc
+
+    prompt = f"""Summarize the following task description in 1-2 sentences:\n\n\"\"\"{long_desc}\"\"\"\n\nSummary:"""
+
+    TOGETHER_API_KEY = os.getenv("TOGETHER_API_KEY")  # set this in your .env
+
+    try:
+        response = requests.post(
+            "https://api.together.xyz/v1/chat/completions",
+            headers={
+                "Authorization": f"Bearer {TOGETHER_API_KEY}",
+                "Content-Type": "application/json",
+            },
+            json={
+                "model": "mistralai/Mistral-7B-Instruct-v0.1",
+                "messages": [
+                    {"role": "system", "content": "You are a helpful assistant that summarizes task descriptions clearly."},
+                    {"role": "user", "content": prompt}
+                ],
+                "temperature": 0.5,
+                "max_tokens": 150
+            },
+        )
+
+        result = response.json()
+        summary = result["choices"][0]["message"]["content"].strip()
+    except Exception as e:
+        summary = "Failed to generate summary: " + str(e)
+
+    return render_template('view.html', todo=todo, summary=summary)
+   
+
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5000) 
+    app.run(debug=False, port=5000) 
