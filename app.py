@@ -51,7 +51,7 @@ def update(sno):
         todo.desc = desc
         db.session.add(todo)
         db.session.commit()
-        return redirect('/')
+        return redirect('/tasks')
 
     
     todo = Todo.query.filter_by(sno = sno).first()
